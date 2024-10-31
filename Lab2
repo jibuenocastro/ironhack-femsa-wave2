@@ -1,0 +1,108 @@
+Notas la falla en los siguientes principios solid
+
+S: Single Responsibility Principle (SRP) - Principio de responsabilidad única
+    No se estaba respetando la responsabilidad unica de las clases ya que la clase SystemManager estaba realizando multiples tareas como verificar inventario, procesar pagos, actualizar el estado del pedido y notificar al cliente.
+
+O: Open/Closed Principle (OCP) - Principio de abierto/cerrado
+    En la clase SystemManager no estaba abierta para extenderla y cerrada para modificarla estaba muy amarrado a los metodos definidos dentro de la misma clase.
+
+L: Liskov Substitution Principle (LSP) - Principio de sustitución de Liskov
+    No se estaba respetando este principio ya que la clase SystemManager no estaba permitiendo la sustitución de sus métodos por otros métodos de la misma clase. 
+
+I: Interface Segregation Principle (ISP) - Principio de segregación de la interfaz
+    La clase SystemManager estaba implementando métodos de diferentes tiopos que se pueden desacoplar del metodo principal
+
+D: Dependency Inversion Principle (DIP) - Principio de inversión de dependencia
+
+
+ Creo que la implementacion del principio solid en el codigo anterior se puede hacer de la siguiente manera:
+
+1. Crear una interfaz para cada servicio que la clase SystemManager necesita para interactuar con el sistema.
+2. Crear una clase abstracta para la generación de pedidos que contenga la lógica común para verificar el inventario.
+3. Crear una clase PaymentServiceImpl que implemente la interfaz PaymentService y contenga la lógica para procesar pagos.
+4. Modificar la clase SystemManager para que dependa de las interfaces en lugar de las implementaciones concretas de los servicios.
+5. Refactorizar el código para que cada clase tenga una sola responsabilidad y siga los principios SOLID.
+
+/*Modificaciones
+No se si esta es la mejor forma de hacerlo pero creo que así quedaria de acuerdo a mi entendimiento sobre los principios solid*/
+
+class Interface EmailService {
+    void sendEmail(String email, String message);
+}
+
+class Interface Database {
+    void updateOrderStatus(int orderId, String status);
+}
+
+class Interface PaymentService {
+    boolean processStandardPayment(double amount);
+    boolean expressPaymentService(double amount, priority);
+}
+
+class abstract boolean GenerateOrder {
+    boolean verifyInventory(int quantity);
+}
+
+public class PaymentServiceImpl implements PaymentService {
+    boolean processStandardPayment(double amount) {
+        process(amount);
+    }
+
+    boolean expressPaymentService(double amount, String priority= "") {
+        process(amount, priority);
+    }
+    
+    process(double amount, priority) {
+        return true;
+    }
+}
+
+public class GenerateOrder implements GenerateOrder {
+    public void verifyInventory(int quantity) {
+        // Checks inventory levels
+        if (inventory < quantity) {
+            throw new Error("Out of stock");
+        }
+    }
+}
+
+public class SystemManager {
+    private EmailService _emailService;
+    private Database _database;
+    private PaymentService _paymentService;
+    private GenerateOrder _generateOrder;
+
+
+    public SystemManager(EmailService emailService, Database database, PaymentService paymentService, GenerateOrder generateOrder) {
+        this._emailService = emailService;
+        this._database = database;
+        this._paymentService = paymentService;
+        this._generateOrder = generateOrder;
+    }
+
+    public void processOrder(Order order) {
+        boolean result;
+        _generateOrder.verifyInventory(order.getQuantity());
+        if (order.getType() == "standard") {
+            result = _paymentService.processStandardPayment(order.getAmount());
+        } else if (order.getType() == "express") {
+            result = _paymentService.expressPaymentService(order.getAmount(), "highPriority");
+        }
+        updateOrderStatus(order, "processed");
+        notifyCustomer(order);
+    }
+    private void updateOrderStatus(Order order, String status) {
+        // Updates the order status in the database
+        database.updateOrderStatus(order.getId(), status);
+    }
+
+    private void notifyCustomer(Order order) {
+        // Sends an email notification to the customer
+        emailService.sendEmail(order.getCustomerEmail(), "Your order has been processed.");
+    }
+}
+
+
+
+
+
