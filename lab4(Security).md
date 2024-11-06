@@ -39,10 +39,11 @@ El codigo es vulnerable:
 - El objeto userCredential esta concatenado con el token expiration, lo cual genera un riesgo de que los datos del usuario pueden ser visibles despues de que se decifre el JWT.
     
 
-Como medida de seguridad implementar en la generación del JWT lo siguiente
-        - Header: Definir tipo de algoritmo HS256 de typo JWT 
-        - Payload: No agregar datos sensibles relacionados con el usuario 
-        - Firma: Utilizar una firma HS256 con los datos del pyalod, header y el tiempo de expiración
+Como medida de seguridad implementar en la generación del JWT lo siguiente:
+
+- Header: Definir tipo de algoritmo HS256 de typo JWT 
+- Payload: No agregar datos sensibles relacionados con el usuario 
+- Firma: Utilizar una firma HS256 con los datos del pyalod, header y el tiempo de expiración
 
 
 -------------------------------------------------------------------------------------------------------
