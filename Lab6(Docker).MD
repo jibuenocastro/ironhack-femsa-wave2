@@ -1,22 +1,22 @@
 # LAB6
 
 ## 1.- Review Simulated CI/CD Pipeline Configuration:
-Build Stage:
-     Code Commit: 
-        Ayuda a la integración de codigo de forma rápida y eficiente, además de mantener un historial de cambios.
+#### Build Stage:
 
-Test Stage:
+### Code Commit: 
+- Ayuda a la integración de codigo de forma rápida y eficiente, además de mantener un historial de cambios.
 
-    -Permite tener pruebas automatizadas para garantizar la funcionalidad de la aplicación y si hay 
-    algun impacto en alguna parte del flujo del codigo 
+### Test Stage:
 
-Deployment Stage:
+Permite tener pruebas automatizadas para garantizar la funcionalidad de la aplicación y si hay algun impacto en alguna parte del flujo del codigo 
 
-    -Para la parte del desarrollo se puede utilizar herramientas como kubernetes para la administración de imagenes 
-    para los ambientes de desarrollo, pruebas y producción.
+### Deployment Stage:
+
+Para la parte del desarrollo se puede utilizar herramientas como kubernetes para la administración de imagenes para los ambientes de desarrollo, pruebas y producción.
 
 
 Un ejemplo de un archivo de configuración en yaml para la implementación de un CD/CI seria de la siguiente manera:
+
 ```bash
 
   # Archivo .gitlab-ci.yml
