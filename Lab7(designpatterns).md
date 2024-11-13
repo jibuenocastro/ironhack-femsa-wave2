@@ -92,23 +92,6 @@ Ej: Notificar al componente log que se guardo un registro
 
 ```bash
 
-class GenerateLog {
-    List observers = new List();
-    Map stockPrices = new Map();
- 
-    public void guardarRegistro(stock, price) {
-        stockPrices.put(stock, price);
-        notifyObservers(stock);
-    }
- 
-    method notifyObservers(stock) {
-        for each observer in observers {
-            observer.update(stock, stockPrices.get(stock));
-        }
-    }
-}
-
-
 public interface Observer {
     void onRecordSaved(String message);
 }
@@ -179,3 +162,10 @@ const obtenerDatos = async () => {
 }
 
 ```
+
+
+# 2.- Project Execution Simulation:
+
+- Simulate the application of these patterns in a hypothetical software project. Document the approach, rationale, and integration process of the chosen patterns as they apply to the design challenges.
+
+De acuerdo a los ejemplos que puse en cada uno de los patrones de diseño en la actividad del punto uno, y tomando en consideracion el diseño sobre el tema del menú que usé en el patron de diseño factory con un enfoque backend, en ese sentido la intención es utilizar el patron singleton para crear una conexión en una base de datos donde se puedan obtener los datos del menu para cada uno de los roles de cada usuario, esto implica mandar en el response el menu que se mostraría en de lado del front que se obtendrían con el diseño del patron fractory, adicional a eso en el patrón observator, para implementar un tipo log de acceso a la aplicación subscrito a los roles(subjects) que accedan a la aplicación  y en el patrón de diseño asyncrono, se puede utilizar para algun consumo a una api externa. 
