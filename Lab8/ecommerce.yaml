@@ -1,0 +1,268 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/jesus.bueno/ecommerce/1.0.0
+info:
+  version: "1.0.0"
+  title: Ecommerce
+  description: >-
+    Este es un ejemplo del diseño de unas apis ecommerce
+paths:
+  /api/v1/users/{id_User}:
+    get:
+      tags: [users]
+      summary: Obtiene el usuario
+      parameters:
+        - in: path
+          name: id_User
+          schema:
+            type: integer
+          required: true
+          description: Numero de pagina
+      description: >-
+        Obtiene los datos y el perfil de usuario
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Nombre de usuario único
+                    example: "juan_perez"
+                  email:
+                    type: string
+                    description: Correo electrónico del usuario
+                    format: email
+                    example: "juan.perez@example.com"
+                  password:
+                    type: string
+                    description: Contraseña del usuario
+                    format: password
+                    example: "password123"
+                  rol:
+                    type: string
+                    description: Rol del usuario
+                    example: "admin"
+        '404':
+          description: Not Found
+        '403':
+          description: Forbiden
+        '500':
+          description: Internal Server Error  
+  /api/v1/users:
+    post:
+      tags: [users]
+      summary: Genera un usuario
+      description: >-
+        Guarda un usuario 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Nombre de usuario único
+                  example: "juan_perez"
+                email:
+                  type: string
+                  description: Correo electrónico del usuario
+                  format: email
+                  example: "juan.perez@example.com"
+                password:
+                  type: string
+                  description: Contraseña del usuario
+                  format: password
+                  example: "password123"
+                rol:
+                  type: string
+                  description: Rol del usuario
+                  example: "admin"
+              required:
+                - username
+                - email
+                - password
+                - rol
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Usuario registrado con éxito"
+                  userId:
+                    type: string
+                    example: "123e4567-e89b-12d3-a456-426614174000"
+        '404':
+          description: Not Found
+        '403':
+          description: Forbiden
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    errorCode:
+                      type: string
+                      example: "INVALID_EMAIL"
+                    description:
+                      type: string
+                      example: "El email es invalido o ya existe"
+  /api/v1/oders/{page_size}:
+    get:
+      tags: [Oders]
+      summary: Obtiene todas las ordenes
+      parameters:
+        - in: path
+          name: page_size
+          schema:
+            type: integer
+          required: true
+          description: Numero de pagina
+      description: >-
+        Obtiene todos los datos de las orden con el parametro de paginacion
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Número de orden
+                      example: 1243
+                    description:
+                      type: string
+                      description: Descripcion de la orden
+                      example: "orden 1"
+                    orderDate:
+                      type: string
+                      description: Fecha orden  
+                      example: "2024-10-17 18:20:34:00"
+        '404':
+          description: Not Found
+        '403':
+          description: Forbiden
+        '500':
+          description: Internal Server Error 
+  /api/v1/oders/{orderId}:
+    get:
+      tags: [Oders]
+      summary: Obtiene todas las ordenes
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: integer
+          required: true
+          description: Numero de orden
+      description: >-
+        Obtiene los datos de las orden con el parametro de paginacion
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Número de orden
+                    example: 1243
+                  description:
+                    type: string
+                    description: Descripcion de la orden
+                    example: "orden 1"
+                  orderDate:
+                    type: string
+                    description: Fecha orden  
+                    example: "2024-10-17 18:20:34:00"
+        '404':
+          description: Not Found
+        '403':
+          description: Forbiden
+        '500':
+          description: Internal Server Error 
+  /api/v1/oders:
+    post:
+      tags: [Oders]
+      summary: Genera una orden
+      description: >-
+        Guarda un usuario 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Numero de orden 
+                  example: 13243
+                description :
+                  type: string
+                  description: Descripcion de la orden 
+                  example: "order 2"
+                orderDate:
+                  type: string
+                  description: Fecha de la orden
+                  example:  "2024-10-17 18:20:34:00"
+              required:
+                - id
+                - description
+                - orderDate
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 12432
+        '404':
+          description: Not Found
+        '403':
+          description: Forbiden
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    errorCode:
+                      type: string
+                      example: "INVALID_ORDER"
+                    description:
+                      type: string
+                      example: "La orden no es correcta"
