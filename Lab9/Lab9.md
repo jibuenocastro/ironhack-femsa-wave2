@@ -5,7 +5,7 @@ Nota: Para poder responder a todas las preguntas del lab creo que es necesario q
 
 ## Un diagrama de la arquitectura propuesta.
 
-![ Alt Text](URL)
+![ Alt Text](https://github.com/jibuenocastro/ironhack-femsa-wave2/blob/main/Lab9/DiagramaArquitectura-Lab9.drawio.png)
 
 ## Explicación de cómo interactúan los servicios y el flujo de comunicación entre ellos.
 
