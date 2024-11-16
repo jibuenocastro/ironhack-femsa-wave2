@@ -1,4 +1,4 @@
-// Inefficient loop handling and excessive DOM manipulation
+## // Inefficient loop handling and excessive DOM manipulation
 
 ```bash
 function updateList(items) {
@@ -30,9 +30,9 @@ function updateList(items) {
 }
 ```
 
-
+## // Redundant database queries
 ```bash
-// Redundant database queries
+
 public class ProductLoader {
   public List<Product> loadProducts() {
       List<Product> products = new ArrayList<>();
@@ -44,6 +44,7 @@ public class ProductLoader {
 }
 ```
 - Se puede hacer una sola consulta a la base de datos para obtener todos los productos en lugar de hacer una consulta por cada producto
+
 ```bash
 public class ProductLoader {
   public List<Product> loadProducts() {
@@ -59,7 +60,7 @@ public class DataBase {
 ```
 
 
-// Unnecessary computations in data processing
+## // Unnecessary computations in data processing
 
 ```bash
 public List<int> ProcessData(List<int> data) {
@@ -74,7 +75,7 @@ public List<int> ProcessData(List<int> data) {
     return result;
 }
 ```
-//usar un ternario para eliminar el if else y hacer el cálculo en una sola línea
+- Usar un ternario para eliminar el if else y hacer el cálculo en una sola línea
 ```bash
 public List<int> ProcessData(List<int> data) {
     List<int> result = new List<int>();
