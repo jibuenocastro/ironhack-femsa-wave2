@@ -20,6 +20,9 @@ Implementar un conjunto de instancias para balancear la carga en la aplicación 
 
 # Part 4: Theoretical Implementation
 
+![ Alt Text](https://github.com/jibuenocastro/ironhack-femsa-wave2/blob/main/Lab11/DiagramaAWS-Lab11.png)
+
+
 # Part 5: Discussion and Evaluation
 
 En el ejemplo del diagrama, la intención era usar algunos elementos que se vieron en el curso, la idea es que haya instancias de EC2 y eque estas instancias hagan la comuninicacion con la base de datos de DinamoDB, a su vez la implementacion de un event bridge cuando se crea un archivo en un S3 y este a su vez genere un registro en DinamoDB, se implemto un load balancer para distibuir la carga y una VPC que permite conectarse desde una red publica. La implementación de los usuarios IAM de debe implementar por roles, estos dependiendo la necesidad se dan el minimo acceso para realizar la actividad que se requieran, supongamos para los devs asignar todos los permisos sobre los buckets en ambiente de desarrollo, permisos de lectura solo para QA y para prod en los S3. 
